@@ -41,7 +41,6 @@ def discover_maze_tremaux():
                 marks[cell["walls"][direction]["mark"]].append(direction)
 
         if len(marks[2]) == len(cell["exits"]):
-            # all walls double marked. We have completed the map
             break
         next_dir = None
 

@@ -1,13 +1,12 @@
 def do_maze_cycle(discovery):
     grid, target = discovery
-    node = None
     opposite_directions = {
         North: South,
         South: North,
         East: West,
         West: East,
     }
-
+    fertilizer = Items.Fertilizer
     while True:
         node = find_path(grid, target)
         while node != None:
@@ -19,11 +18,9 @@ def do_maze_cycle(discovery):
                     node["blocked"].remove(direction)
                     other_node["blocked"].remove(opposite)
 
-                    node["exits"][direction] = 0
-                    other_node["exits"][opposite] = 0
+                    node["exits"].add(direction)
+                    other_node["exits"].add(opposite)
 
-                    node["connectivity"].add(other_node["pos"])
-                    other_node["connectivity"].add(node["pos"])
                     move(opposite)
 
             next = node["parent"]
@@ -33,14 +30,12 @@ def do_maze_cycle(discovery):
             move(node["directions"][next["pos"]])
             node = next
 
-        next_pos = measure()
-        if next_pos == None:
+        target = measure()
+        if target == None:
             harvest()
             break
-        else:
-            while get_entity_type() == Entities.Treasure:
-                use_item(Items.Fertilizer)
-        target = next_pos
+        while not use_item(fertilizer):
+            pass
 
 
 def discover_maze(perfect):
@@ -83,7 +78,7 @@ def maze_cycle():
         while not can_harvest():
             if get_water() < 1 and num_items(Items.Water_Tank) >= 1:
                 use_item(Items.Water_Tank)
-        while get_entity_type() != Entities.Bush:
+        while get_entity_type() == Entities.Bush:
             if num_items(Items.Fertilizer) < cycle_length:
                 if not trade(Items.Fertilizer):
                     continue

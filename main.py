@@ -11,12 +11,17 @@ def farm_pumpkins(pumpkin_target):
     return True
 
 
-for i in range(10):
+def benchmark_maze_cycle():
+    gold = num_items(Items.Gold)
     power = num_items(Items.Power)
     seconds = get_time()
     ops = get_op_count()
     maze_cycle()
-    ops = get_op_count() - ops
     seconds = get_time() - seconds
+    ops = get_op_count() - ops
     power = power - num_items(Items.Power)
-    print(seconds, "seconds, ", ops, "ops, ", power, "power")
+    gold = num_items(Items.gold) - gold
+    print(seconds, "seconds,", ops, "ops,", power, "power,", gold, "gold")
+
+
+benchmark_maze_cycle()

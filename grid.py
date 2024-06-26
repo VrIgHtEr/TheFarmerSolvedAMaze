@@ -10,18 +10,7 @@ def prepare_grid(discovered):
                     "pos": (x, y),
                     "neighbours": {},
                     "blocked": set(),
-                    "exits": {East: 0, North: 0, West: 0, South: 0},
-                    "connectivity": {
-                        ((x + 1) % world_size, y),
-                        ((x + world_size - 1) % world_size, y),
-                        (x, (y + 1) % world_size),
-                        (x, (y + world_size - 1) % world_size),
-                    },
-                    "heap_index": 0,
-                    "parent": None,
-                    "cost": 0,
-                    "min_cost": 0,
-                    "heuristic": 0,
+                    "exits": {East, North, West, South},
                     "directions": {},
                 }
             )
@@ -47,13 +36,11 @@ def prepare_grid(discovered):
                 or north["pos"] not in discovered[current["pos"]]
             ):
                 node = current["neighbours"][North]
-                current["exits"].pop(North)
+                current["exits"].remove(North)
                 current["blocked"].add(North)
-                current["connectivity"].remove(node["pos"])
 
-                node["exits"].pop(South)
+                node["exits"].remove(South)
                 node["blocked"].add(South)
-                node["connectivity"].remove(current["pos"])
 
             if (
                 current["pos"] not in discovered
@@ -61,11 +48,9 @@ def prepare_grid(discovered):
             ):
                 node = current["neighbours"][East]
 
-                current["exits"].pop(East)
+                current["exits"].remove(East)
                 current["blocked"].add(East)
-                current["connectivity"].remove(node["pos"])
 
-                node["exits"].pop(West)
+                node["exits"].remove(West)
                 node["blocked"].add(West)
-                node["connectivity"].remove(current["pos"])
     return grid

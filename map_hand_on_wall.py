@@ -26,5 +26,4 @@ def discover_maze_hand_on_wall():
                 current_pos = new_pos
                 pdir = d_idx
                 break
-
     return prepare_grid(discovered), treasure_pos
