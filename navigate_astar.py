@@ -1,13 +1,12 @@
 def heap_float(heap, child_index):
     while child_index > 0:
         parent_index = (child_index - 1) // 2
-        if heap[parent_index]["min_cost"] - heap[child_index]["min_cost"] <= 0:
+        parent, child = heap[parent_index], heap[child_index]
+        d = parent["min_cost"] - child["min_cost"]
+        if d < 0 or (d == 0 and parent["heuristic"] <= child["heuristic"]):
             break
-        heap[parent_index], heap[child_index] = heap[child_index], heap[parent_index]
-        heap[child_index]["heap_index"], heap[parent_index]["heap_index"] = (
-            child_index,
-            parent_index,
-        )
+        heap[parent_index], heap[child_index] = child, parent
+        parent["heap_index"], child["heap_index"] = child_index, parent_index
         child_index = parent_index
 
 
