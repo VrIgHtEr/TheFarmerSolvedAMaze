@@ -10,3 +10,5 @@ After the map is finished, navigation is done using the A* algorithm.
 While following the path, any known walls for each cell are tested again. The drone will still revert to following the previously generated path after testing the walls of each cell it passes through, which is probably good enough, as it probably had a pretty good quality path already. It is not worth running the A* algorithm again after every change in the map. The updated map will be taken advantage of on the next iteration.
 
 Before starting, the drone will attempt to farm enough pumpkins to trade enough fertilizer for the whole cycle. You should probably fill in the `farm_pumpkins` function in the main.py file.
+
+![176.55 seconds, 2966096 ops, 494.35 power, 150000 gold](screenshot.png)
