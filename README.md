@@ -1,5 +1,8 @@
 # TheFarmerSolvedAMaze
+
 Farm gold in the game The Farmer Was Replaced
+
+![176.55 seconds, 2966096 ops, 494.35 power, 150000 gold](screenshot.png)
 
 If the drone detects a maze already present it will map the existing maze using the Tremaux algorithm. This algorithm is chosen because it can handle cycles created by walls being removed during the partially completed cycle. It will then attempt to complete the cycle using the resources it already has.
 
@@ -11,4 +14,3 @@ While following the path, any known walls for each cell are tested again. The dr
 
 Before starting, the drone will attempt to farm enough pumpkins to trade enough fertilizer for the whole cycle. You should probably fill in the `farm_pumpkins` function in the main.py file.
 
-![176.55 seconds, 2966096 ops, 494.35 power, 150000 gold](screenshot.png)
